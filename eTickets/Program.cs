@@ -16,10 +16,10 @@ namespace eTickets
             
 
             // Configure the Connection String
-            /*
+            
              builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
-            */
+            
 
 
             // Add Services to Container "Register"
@@ -50,7 +50,7 @@ namespace eTickets
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             // Seeding Data
-            /*AppDbInitializer.Seed(app);*/
+            AppDbInitializer.Seed(app);
 
             app.Run();
         }

@@ -1,23 +1,25 @@
 ﻿using eTickets.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace eTickets.Models
 {
     public class AppDbContext : DbContext
     {
-        /*public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext() : base()
+        {
+        
+        }
+        public AppDbContext(DbContextOptions options) : base(options)
         {
 
         }
-        public AppDbContext()
-        {
-        }*/
-
+        /*
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-E2BL44H\\SQLEXPRESS; Initial Catalog = eTickets; Integrated Security=True;Trust Server Certificate=True;");
         }
-
+        */
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Actor_Movie>().HasKey(am => new

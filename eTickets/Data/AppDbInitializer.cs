@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace eTickets.Data
 {
-    /*public class AppDbInitializer // AppDbInitializer.SeedData();
+    public class AppDbInitializer // AppDbInitializer.SeedData();
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
@@ -318,5 +318,5 @@ namespace eTickets.Data
                 //context.SaveChanges();
             }
         }
-    }*/
+    }
 }

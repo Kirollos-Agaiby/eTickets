@@ -6,7 +6,11 @@ namespace eTickets.Services
     // CRUD Operations [Create - Read - Update - Delete]
     public class ActorService : IActorService
     {
-        AppDbContext Context = new AppDbContext();
+        AppDbContext Context;// = new AppDbContext();
+        public ActorService(AppDbContext Context)
+        {
+            this.Context = Context;
+        }
         public List<Actor> GetAll()
         {
             List<Actor> actors = Context.Actors.ToList();

@@ -5,7 +5,11 @@ namespace eTickets.Services
 {
     public class MovieService : IMovieService
     {
-        AppDbContext Context = new AppDbContext();
+        AppDbContext Context; // = new AppDbContext();
+        public MovieService(AppDbContext Context)
+        {
+            this.Context = Context;
+        }
         public List<Movie> GetAll()
         {
             List<Movie> movies = Context.Movies.ToList();

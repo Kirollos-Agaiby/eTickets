@@ -4,7 +4,11 @@ namespace eTickets.Services
 {
     public class ProducerService : IProducerService
     {
-        AppDbContext Context = new AppDbContext();
+        AppDbContext Context; // = new AppDbContext();
+        public ProducerService(AppDbContext Context)
+        {
+            this.Context = Context;
+        }
         public List<Producer> GetAll()
         {
             List<Producer> producers = Context.Producers.ToList();
