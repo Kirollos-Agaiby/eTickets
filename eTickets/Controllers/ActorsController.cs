@@ -16,5 +16,15 @@ namespace eTickets.Controllers
             List<Actor> actors = service.GetAll();
             return View(actors);
         }
+        // Get : Actors/Create
+        public IActionResult Create(string ProfilePictureURL, string FullName, string Bio)
+        {
+            Actor actor = new Actor();
+            actor.ProfilePictureURL = ProfilePictureURL;
+            actor.FullName = FullName;
+            actor.Bio = Bio;
+            service.Insert(actor);
+            return View();
+        }
     }
 }
