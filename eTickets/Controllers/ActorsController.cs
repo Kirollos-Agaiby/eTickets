@@ -28,7 +28,7 @@ namespace eTickets.Controllers
             Actor actor = service.GetById(id);
             if (actor == null)
             {
-                return Content("NotFound");
+                return View("NotFound");
             }
             return View(actor);
         }
@@ -68,7 +68,7 @@ namespace eTickets.Controllers
         [HttpPost]
         public IActionResult SaveEdit(int id, Actor actor)
         {
-            if(actor != null)
+            if(actor != null && actor.FullName != null)
             {
                 service.Update(id, actor);
                 return RedirectToAction("Index");
@@ -76,9 +76,8 @@ namespace eTickets.Controllers
             return View("Edit", actor);
         }
 
-
-
         // Delete
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             service.Delete(id);

@@ -5,7 +5,7 @@ namespace eTickets.Services
     public interface ICinemaService
     {
         List<Cinema> GetAll();
-        Cinema GitById(int id);
+        Cinema GetById(int id);
         void Insert(Cinema newCinema);
         void Update(int id, Cinema newCinema);
         void Delete(int id);

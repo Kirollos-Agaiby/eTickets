@@ -14,7 +14,7 @@ namespace eTickets.Services
             List<Cinema> cinemas = Context.Cinemas.ToList();
             return cinemas;
         }
-        public Cinema GitById(int id)
+        public Cinema GetById(int id)
         {
             Cinema cinema = Context.Cinemas.FirstOrDefault(x => x.Id == id);
             return cinema;
@@ -26,7 +26,7 @@ namespace eTickets.Services
         }
         public void Update(int id, Cinema newCinema)
         {
-            Cinema odlCinema = GitById(id);
+            Cinema odlCinema = GetById(id);
             odlCinema.Logo        = newCinema.Logo;
             odlCinema.Name        = newCinema.Name;
             odlCinema.Description = newCinema.Description;
@@ -34,7 +34,7 @@ namespace eTickets.Services
         }
         public void Delete(int id)
         {
-            Cinema cinema = GitById(id);
+            Cinema cinema = GetById(id);
             Context.Cinemas.Remove(cinema);
             Context.SaveChanges();
         }

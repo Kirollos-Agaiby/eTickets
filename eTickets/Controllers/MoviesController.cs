@@ -12,10 +12,36 @@ namespace eTickets.Controllers
         {
             this.service = service;
         }
+
+        //GetAll
+        [HttpGet]
         public IActionResult Index()
         {
             List<Movie> movies = service.GetAllWithCinemasName();
             return View(movies);
+        }
+
+        //GetById
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Movie movie = service.GetById(id);
+            return View(movie);
+        }
+
+
+        //Create
+
+        //Update
+
+
+
+        //Delete
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            service.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }
