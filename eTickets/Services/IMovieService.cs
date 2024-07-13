@@ -10,5 +10,9 @@ namespace eTickets.Services
         void Insert(Movie newMovie);
         void Update(int id, Movie newMovie);
         void Delete(int id);
+
+        // asasdc
+        List<Cinema> GetAllCinemas();
+        List<Producer> GetAllProducers();
     }
 }

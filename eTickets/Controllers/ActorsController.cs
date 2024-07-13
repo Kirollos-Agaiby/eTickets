@@ -50,10 +50,7 @@ namespace eTickets.Controllers
                 service.Insert(actor);
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View("Create", actor);
-            }
+            return View("Create", actor);
         }
 
 

@@ -15,6 +15,22 @@ namespace eTickets.Services
             List<Movie> movies = Context.Movies.ToList();
             return movies;
         }
+
+        // some not 
+        public List<Cinema> GetAllCinemas()
+        {
+            List<Cinema> cinemas = Context.Cinemas.ToList();
+            return cinemas;
+        }
+        public List<Producer> GetAllProducers()
+        {
+            List<Producer> producers = Context.Producers.ToList();
+            return producers;
+        }
+
+
+
+
         public List<Movie> GetAllWithCinemasName()
         {
             List<Movie> movies = Context.Movies.Include(n => n.Cinema).ToList();

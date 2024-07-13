@@ -31,6 +31,34 @@ namespace eTickets.Controllers
 
 
         //Create
+        [HttpGet]
+        public IActionResult Create()
+        {
+            //ViewData["Cinemas"] = service.Cinemas.GetAll();
+
+            // how to call GetAll of Cinemas and Producers
+            // using service layer 
+            ViewData["cinemas"] = service.GetAllCinemas();
+            ViewData["producers"] = service.GetAllProducers();
+            return View(new Movie());
+        }
+
+        [HttpPost]
+        public IActionResult SaveNew([Bind(include: "Name,Description,Price,ImageURL,MovieCategory,CinemaId,ProducerId")]Movie movie)
+        {
+            if (movie.Name != null)
+            {
+                service.Insert(movie);
+                return RedirectToAction("Index");
+            }
+
+            ViewData["cinemas"] = service.GetAllCinemas();
+            ViewData["producers"] = service.GetAllProducers();
+            return View("Create", movie);
+        }
+
+
+
 
         //Update
 
