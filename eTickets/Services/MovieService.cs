@@ -15,22 +15,6 @@ namespace eTickets.Services
             List<Movie> movies = Context.Movies.ToList();
             return movies;
         }
-
-        // some not 
-        public List<Cinema> GetAllCinemas()
-        {
-            List<Cinema> cinemas = Context.Cinemas.ToList();
-            return cinemas;
-        }
-        public List<Producer> GetAllProducers()
-        {
-            List<Producer> producers = Context.Producers.ToList();
-            return producers;
-        }
-
-
-
-
         public List<Movie> GetAllWithCinemasName()
         {
             List<Movie> movies = Context.Movies.Include(n => n.Cinema).ToList();
@@ -49,13 +33,13 @@ namespace eTickets.Services
         public void Update(int id, Movie newMovie)
         {
             Movie oldMovie = GetById(id);
-            oldMovie.Name           = oldMovie.Name;
-            oldMovie.Description    = oldMovie.Description;
-            oldMovie.Price          = oldMovie.Price;
-            oldMovie.ImageURL       = oldMovie.ImageURL;
-            oldMovie.StartDate      = oldMovie.StartDate;
-            oldMovie.EndDate        = oldMovie.EndDate;
-            oldMovie.MovieCategory  = oldMovie.MovieCategory;
+            oldMovie.Name           = newMovie.Name;
+            oldMovie.Description    = newMovie.Description;
+            oldMovie.Price          = newMovie.Price;
+            oldMovie.ImageURL       = newMovie.ImageURL;
+            oldMovie.StartDate      = newMovie.StartDate;
+            oldMovie.EndDate        = newMovie.EndDate;
+            oldMovie.MovieCategory  = newMovie.MovieCategory;
             Context.SaveChanges();
         }
         public void Delete(int id)

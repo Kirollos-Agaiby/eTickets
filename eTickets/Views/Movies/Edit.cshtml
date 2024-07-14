@@ -1,21 +1,25 @@
 ﻿@model MovieandCinemasandProducersandMovieCategoriesListsViewModel
 
 @{
-    ViewData["Title"] = "Add a new movie";
+    ViewData["Title"] = "Update movie";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Add a New Movie</h1>
+            <h1>Update Movie</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="SaveNew">
+                <form asp-action="SaveEdit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group text-center">
                         <img id="ImageURL" class="border-info rounded-circle" style="max-width: 150px" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Id" type="hidden" value="@Model.Id" class="form-control" />
+                        <span asp-validation-for="Id" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="ImageURL" class="control-label"></label>
@@ -42,37 +46,57 @@
                         <select name="MovieCategory" class="form form-control">
                             @foreach (var item in Model.movieCategorys)
                             {
-                                <option> @item </option>
+                                if(item == Model.MovieCategory)
+                                {
+                                    <option selected> @item </option>
+                                }
+                                else
+                                {
+                                    <option> @item </option>
+                                }
                             }
                         </select>
                         <span asp-validation-for="MovieCategory" class="text-danger"></span>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label asp-for="CinemaId" class="control-label"></label>                        
+                        <label asp-for="CinemaId" class="control-label"></label>
                         <select name="CinemaId" class="form form-control">
                             @foreach (var item in Model.cinemas)
                             {
-                                <option value="@item.Id"> @item.Name</option>
+                                if (item.Id == Model.CinemaId)
+                                {
+                                    <option value="@item.Id" selected> @item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id"> @item.Name</option>
+                                }
                             }
                         </select>
                         <span asp-validation-for="CinemaId" class="text-danger"></span>
                     </div>
-                    
+
                     <div class="form-group">
                         <label asp-for="ProducerId" class="control-label"></label>
                         <select name="ProducerId" class="form form-control">
                             @foreach (var item in Model.producers)
                             {
-                                <option value="@item.Id"> @item.FullName</option>
+                                if (item.Id == Model.ProducerId)
+                                {
+                                    <option value="@item.Id" selected> @item.FullName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id"> @item.FullName</option>
+                                }
                             }
                         </select>
                         <span asp-validation-for="ProducerId" class="text-danger"></span>
                     </div>
-                    
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                     </div>
                 </form>
@@ -80,3 +104,18 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            var output = document.getElementById('ImageURL');
+            output.src = $("#ImageURL").val();
+        })
+
+        $("#ImageURL").on("change", function () {
+            var output = document.getElementById('ImageURL');
+            output.src = $(this).val();
+        })
+    </script>
+}

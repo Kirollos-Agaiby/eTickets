@@ -6,17 +6,17 @@ namespace eTickets.Controllers
 {
     public class CinemasController : Controller
     {
-        ICinemaService service;
-        public CinemasController(ICinemaService service)
+        ICinemaService cinemaService;
+        public CinemasController(ICinemaService cinemaService)
         {
-            this.service = service;
+            this.cinemaService = cinemaService;
         }
 
         //GetAll
         [HttpGet]
         public IActionResult Index()
         {
-            List<Cinema> cinemas = service.GetAll();
+            List<Cinema> cinemas = cinemaService.GetAll();
             return View(cinemas);
         }
 
@@ -24,7 +24,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Cinema cinema = service.GetById(id);
+            Cinema cinema = cinemaService.GetById(id);
             if(cinema == null)
             {
                 return View("NotFound");
@@ -44,7 +44,7 @@ namespace eTickets.Controllers
         {
             if(cinema.Name != null)
             {
-                service.Insert(cinema);
+                cinemaService.Insert(cinema);
                 return RedirectToAction("Index");
             }
             return View("Create", cinema);
@@ -55,7 +55,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Cinema cinema = service.GetById(id);
+            Cinema cinema = cinemaService.GetById(id);
             return View(cinema);
         }
 
@@ -64,7 +64,7 @@ namespace eTickets.Controllers
         {
             if(cinema != null && cinema.Name != null)
             {
-                service.Update(id, cinema);
+                cinemaService.Update(id, cinema);
                 return RedirectToAction("Index");
             }
             return View("Edit", cinema);
@@ -74,7 +74,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            service.Delete(id);
+            cinemaService.Delete(id);
             return RedirectToAction("Index");
         }
     }

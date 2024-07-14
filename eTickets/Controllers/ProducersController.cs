@@ -7,17 +7,17 @@ namespace eTickets.Controllers
 {
     public class ProducersController : Controller
     {
-        IProducerService service;
-        public ProducersController(IProducerService service)
+        IProducerService producerService;
+        public ProducersController(IProducerService producerService)
         {
-            this.service = service;
+            this.producerService = producerService;
         }
 
         // GetAll
         [HttpGet]
         public IActionResult Index()
         {
-            List<Producer> producers = service.GetAll();
+            List<Producer> producers = producerService.GetAll();
             return View(producers);
         }
 
@@ -25,7 +25,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Producer producer = service.GetById(id);
+            Producer producer = producerService.GetById(id);
             if (producer == null)
             {
                 return View("NotFound");
@@ -45,7 +45,7 @@ namespace eTickets.Controllers
         {
             if(producer.FullName != null)
             {
-                service.Insert(producer);
+                producerService.Insert(producer);
                 return RedirectToAction("Index");
             }
             return View("Create", producer);
@@ -56,7 +56,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Producer producer = service.GetById(id);
+            Producer producer = producerService.GetById(id);
             return View(producer);
         }
 
@@ -65,7 +65,7 @@ namespace eTickets.Controllers
         {
             if(producer != null && producer.FullName != null)
             {
-                service.Update(id, producer);
+                producerService.Update(id, producer);
                 return RedirectToAction("Index");
             }
             return View("Edit", producer);
@@ -75,7 +75,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            service.Delete(id);
+            producerService.Delete(id);
             return RedirectToAction("Index");
         }
     }

@@ -7,10 +7,10 @@ namespace eTickets.Controllers
 {
     public class ActorsController : Controller
     {
-        IActorService service;
-        public ActorsController(IActorService service)
+        IActorService actorService;
+        public ActorsController(IActorService actorService)
         {
-            this.service = service;
+            this.actorService = actorService;
         }
 
 
@@ -18,14 +18,14 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Actor> actors = service.GetAll();
+            List<Actor> actors = actorService.GetAll();
             return View(actors);
         }
 
         // GetById
         public IActionResult Details(int id)
         {
-            Actor actor = service.GetById(id);
+            Actor actor = actorService.GetById(id);
             if (actor == null)
             {
                 return View("NotFound");
@@ -47,7 +47,7 @@ namespace eTickets.Controllers
         {
             if(actor.FullName != null)
             {
-                service.Insert(actor);
+                actorService.Insert(actor);
                 return RedirectToAction("Index");
             }
             return View("Create", actor);
@@ -58,7 +58,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Actor actor = service.GetById(id);
+            Actor actor = actorService.GetById(id);
             return View(actor);
         }
 
@@ -67,7 +67,7 @@ namespace eTickets.Controllers
         {
             if(actor != null && actor.FullName != null)
             {
-                service.Update(id, actor);
+                actorService.Update(id, actor);
                 return RedirectToAction("Index");
             }
             return View("Edit", actor);
@@ -77,7 +77,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            service.Delete(id);
+            actorService.Delete(id);
             return RedirectToAction("Index");
         }
 
