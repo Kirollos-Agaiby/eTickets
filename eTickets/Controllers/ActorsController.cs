@@ -7,10 +7,10 @@ namespace eTickets.Controllers
 {
     public class ActorsController : Controller
     {
-        IActorService actorService;
-        public ActorsController(IActorService actorService)
+        IActorRepository actorRepository;
+        public ActorsController(IActorRepository actorRepository)
         {
-            this.actorService = actorService;
+            this.actorRepository = actorRepository;
         }
 
 
@@ -18,14 +18,14 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Actor> actors = actorService.GetAll();
+            List<Actor> actors = actorRepository.GetAll();
             return View(actors);
         }
 
         // GetById
         public IActionResult Details(int id)
         {
-            Actor actor = actorService.GetById(id);
+            Actor actor = actorRepository.GetById(id);
             if (actor == null)
             {
                 return View("NotFound");
@@ -47,7 +47,7 @@ namespace eTickets.Controllers
         {
             if(actor.FullName != null)
             {
-                actorService.Insert(actor);
+                actorRepository.Insert(actor);
                 return RedirectToAction("Index");
             }
             return View("Create", actor);
@@ -58,7 +58,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Actor actor = actorService.GetById(id);
+            Actor actor = actorRepository.GetById(id);
             return View(actor);
         }
 
@@ -67,7 +67,7 @@ namespace eTickets.Controllers
         {
             if(actor != null && actor.FullName != null)
             {
-                actorService.Update(id, actor);
+                actorRepository.Update(id, actor);
                 return RedirectToAction("Index");
             }
             return View("Edit", actor);
@@ -77,7 +77,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            actorService.Delete(id);
+            actorRepository.Delete(id);
             return RedirectToAction("Index");
         }
 

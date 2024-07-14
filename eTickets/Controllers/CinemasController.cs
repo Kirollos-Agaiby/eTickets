@@ -6,17 +6,17 @@ namespace eTickets.Controllers
 {
     public class CinemasController : Controller
     {
-        ICinemaService cinemaService;
-        public CinemasController(ICinemaService cinemaService)
+        ICinemaRepository cinemaRepository;
+        public CinemasController(ICinemaRepository cinemaRepository)
         {
-            this.cinemaService = cinemaService;
+            this.cinemaRepository = cinemaRepository;
         }
 
         //GetAll
         [HttpGet]
         public IActionResult Index()
         {
-            List<Cinema> cinemas = cinemaService.GetAll();
+            List<Cinema> cinemas = cinemaRepository.GetAll();
             return View(cinemas);
         }
 
@@ -24,7 +24,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Cinema cinema = cinemaService.GetById(id);
+            Cinema cinema = cinemaRepository.GetById(id);
             if(cinema == null)
             {
                 return View("NotFound");
@@ -44,7 +44,7 @@ namespace eTickets.Controllers
         {
             if(cinema.Name != null)
             {
-                cinemaService.Insert(cinema);
+                cinemaRepository.Insert(cinema);
                 return RedirectToAction("Index");
             }
             return View("Create", cinema);
@@ -55,7 +55,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Cinema cinema = cinemaService.GetById(id);
+            Cinema cinema = cinemaRepository.GetById(id);
             return View(cinema);
         }
 
@@ -64,7 +64,7 @@ namespace eTickets.Controllers
         {
             if(cinema != null && cinema.Name != null)
             {
-                cinemaService.Update(id, cinema);
+                cinemaRepository.Update(id, cinema);
                 return RedirectToAction("Index");
             }
             return View("Edit", cinema);
@@ -74,7 +74,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            cinemaService.Delete(id);
+            cinemaRepository.Delete(id);
             return RedirectToAction("Index");
         }
     }

@@ -23,11 +23,11 @@ namespace eTickets
 
 
             // Add Services to Container "Register"
-            builder.Services.AddScoped<IActorService, ActorService>();
-            builder.Services.AddScoped<IProducerService, ProducerService>();
-            builder.Services.AddScoped<ICinemaService, CinemaService>();
-            builder.Services.AddScoped<IMovieService, MovieService>();
-            builder.Services.AddScoped<IMovieCategoryService, MovieCategoryService>();
+            builder.Services.AddScoped<IActorRepository, ActorRepository>();
+            builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
+            builder.Services.AddScoped<ICinemaRepository, CinemaRepository>();
+            builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+            builder.Services.AddScoped<IMovieCategoryRepository, MovieCategoryRepository>();
 
             var app = builder.Build();
 

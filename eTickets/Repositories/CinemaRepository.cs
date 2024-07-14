@@ -2,10 +2,10 @@
 
 namespace eTickets.Services
 {
-    public class CinemaService : ICinemaService
+    public class CinemaRepository : ICinemaRepository
     {
         AppDbContext Context; // new AppDbContext();
-        public CinemaService(AppDbContext Context)
+        public CinemaRepository(AppDbContext Context)
         {
             this.Context = Context;
         }

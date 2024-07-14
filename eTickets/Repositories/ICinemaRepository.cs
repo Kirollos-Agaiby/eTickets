@@ -2,7 +2,7 @@
 
 namespace eTickets.Services
 {
-    public interface ICinemaService
+    public interface ICinemaRepository
     {
         List<Cinema> GetAll();
         Cinema GetById(int id);

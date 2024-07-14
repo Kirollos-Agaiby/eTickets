@@ -9,25 +9,25 @@ namespace eTickets.Controllers
 {
     public class MoviesController : Controller
     {
-        IMovieService movieService;
-        ICinemaService cinemaService;
-        IProducerService producerService;
-        IMovieCategoryService movieCategoryService;
+        IMovieRepository movieRepository;
+        ICinemaRepository cinemaRepository;
+        IProducerRepository producerRepository;
+        IMovieCategoryRepository movieCategoryRepository;
 
-        public MoviesController(IMovieService movieService, ICinemaService cinemaService,
-            IProducerService producerService, IMovieCategoryService movieCategoryService)
+        public MoviesController(IMovieRepository movieRepository, ICinemaRepository cinemaRepository,
+            IProducerRepository producerRepository, IMovieCategoryRepository movieCategoryRepository)
         {
-            this.movieService = movieService;
-            this.cinemaService = cinemaService;
-            this.producerService = producerService;
-            this.movieCategoryService = movieCategoryService;
+            this.movieRepository = movieRepository;
+            this.cinemaRepository = cinemaRepository;
+            this.producerRepository = producerRepository;
+            this.movieCategoryRepository = movieCategoryRepository;
         }
 
         //GetAll
         [HttpGet]
         public IActionResult Index()
         {
-            List<Movie> movies = movieService.GetAllWithCinemasName();
+            List<Movie> movies = movieRepository.GetAllWithCinemasName();
             return View(movies);
         }
 
@@ -35,7 +35,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Movie movie = movieService.GetById(id);
+            Movie movie = movieRepository.GetById(id);
             return View(movie);
         }
 
@@ -47,9 +47,9 @@ namespace eTickets.Controllers
                 movieandCinemasandProducersandMovieCategoriesListsViewModel
                     = new MovieandCinemasandProducersandMovieCategoriesListsViewModel();
 
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryService.GetAllMovieCategory();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryRepository.GetAllMovieCategory();
             return View(movieandCinemasandProducersandMovieCategoriesListsViewModel);
         }
 
@@ -58,7 +58,7 @@ namespace eTickets.Controllers
         {
             if (movie.Name != null)
             {
-                movieService.Insert(movie);
+                movieRepository.Insert(movie);
                 return RedirectToAction("Index");
             }
             MovieandCinemasandProducersandMovieCategoriesListsViewModel 
@@ -73,9 +73,9 @@ namespace eTickets.Controllers
             movieandCinemasandProducersandMovieCategoriesListsViewModel.CinemaId = movie.CinemaId;
             movieandCinemasandProducersandMovieCategoriesListsViewModel.ProducerId = movie.ProducerId;
 
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryService.GetAllMovieCategory();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryRepository.GetAllMovieCategory();
 
             return View("Create", movieandCinemasandProducersandMovieCategoriesListsViewModel);
         }
@@ -84,7 +84,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Movie movie = movieService.GetById(id);
+            Movie movie = movieRepository.GetById(id);
 
             MovieandCinemasandProducersandMovieCategoriesListsViewModel
                 movieandCinemasandProducersandMovieCategoriesListsViewModel
@@ -101,9 +101,9 @@ namespace eTickets.Controllers
             movieandCinemasandProducersandMovieCategoriesListsViewModel.CinemaId = movie.CinemaId;
             movieandCinemasandProducersandMovieCategoriesListsViewModel.ProducerId = movie.ProducerId;
 
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryService.GetAllMovieCategory();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryRepository.GetAllMovieCategory();
             return View(movieandCinemasandProducersandMovieCategoriesListsViewModel);
         }
 
@@ -112,7 +112,7 @@ namespace eTickets.Controllers
         {
             if(movie != null && movie.Name != null)
             {
-                movieService.Update(id, movie);
+                movieRepository.Update(id, movie);
                 return RedirectToAction("Index");
             }
 
@@ -131,9 +131,9 @@ namespace eTickets.Controllers
             movieandCinemasandProducersandMovieCategoriesListsViewModel.CinemaId = movie.CinemaId;
             movieandCinemasandProducersandMovieCategoriesListsViewModel.ProducerId = movie.ProducerId;
 
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerService.GetAll();
-            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryService.GetAllMovieCategory();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.cinemas = cinemaRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.producers = producerRepository.GetAll();
+            movieandCinemasandProducersandMovieCategoriesListsViewModel.movieCategorys = movieCategoryRepository.GetAllMovieCategory();
 
             return View("Edit", movieandCinemasandProducersandMovieCategoriesListsViewModel);
         }
@@ -142,7 +142,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            movieService.Delete(id);
+            movieRepository.Delete(id);
             return RedirectToAction("Index");
         }
     }

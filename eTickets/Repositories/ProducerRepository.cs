@@ -2,10 +2,10 @@
 
 namespace eTickets.Services
 {
-    public class ProducerService : IProducerService
+    public class ProducerRepository : IProducerRepository
     {
         AppDbContext Context; // = new AppDbContext();
-        public ProducerService(AppDbContext Context)
+        public ProducerRepository(AppDbContext Context)
         {
             this.Context = Context;
         }

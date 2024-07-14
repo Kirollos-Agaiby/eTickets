@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Services
 {
-    public class MovieService : IMovieService
+    public class MovieRepository : IMovieRepository
     {
         AppDbContext Context; // = new AppDbContext();
-        public MovieService(AppDbContext Context)
+        public MovieRepository(AppDbContext Context)
         {
             this.Context = Context;
         }

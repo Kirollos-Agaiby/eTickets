@@ -2,7 +2,7 @@
 
 namespace eTickets.Services
 {
-    public interface IMovieService
+    public interface IMovieRepository
     {
         List<Movie> GetAll();
         List<Movie> GetAllWithCinemasName();

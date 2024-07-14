@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace eTickets.Services
 {
     // CRUD Operations [Create - Read - Update - Delete]
-    public class ActorService : IActorService
+    public class ActorRepository : IActorRepository
     {
         AppDbContext Context;// = new AppDbContext();
-        public ActorService(AppDbContext Context)
+        public ActorRepository(AppDbContext Context)
         {
             this.Context = Context;
         }

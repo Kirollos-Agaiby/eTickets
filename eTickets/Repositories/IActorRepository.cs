@@ -3,7 +3,7 @@
 namespace eTickets.Services
 {
     // CRUD Operations ProtoType [Create - Read - Update - Delete]
-    public interface IActorService
+    public interface IActorRepository
     {
         List<Actor> GetAll();
         Actor GetById(int id);

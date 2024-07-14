@@ -2,7 +2,7 @@
 
 namespace eTickets.Services
 {
-    public interface IProducerService
+    public interface IProducerRepository
     {
         List<Producer> GetAll();
         Producer GetById(int id);

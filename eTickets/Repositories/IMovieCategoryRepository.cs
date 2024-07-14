@@ -2,7 +2,7 @@
 
 namespace eTickets.Services
 {
-    public interface IMovieCategoryService
+    public interface IMovieCategoryRepository
     {
         public IEnumerable<MovieCategory> GetAllMovieCategory();
     }
