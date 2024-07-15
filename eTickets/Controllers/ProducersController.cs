@@ -7,17 +7,17 @@ namespace eTickets.Controllers
 {
     public class ProducersController : Controller
     {
-        IProducerRepository producerRepository;
-        public ProducersController(IProducerRepository producerRepository)
+        IProducerService producerService;
+        public ProducersController(IProducerService producerService)
         {
-            this.producerRepository = producerRepository;
+            this.producerService = producerService;
         }
 
         // GetAll
         [HttpGet]
         public IActionResult Index()
         {
-            List<Producer> producers = producerRepository.GetAll();
+            List<Producer> producers = producerService.GetAll();
             return View(producers);
         }
 
@@ -25,7 +25,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Producer producer = producerRepository.GetById(id);
+            Producer producer = producerService.GetById(id);
             if (producer == null)
             {
                 return View("NotFound");
@@ -45,7 +45,7 @@ namespace eTickets.Controllers
         {
             if(producer.FullName != null)
             {
-                producerRepository.Insert(producer);
+                producerService.Insert(producer);
                 return RedirectToAction("Index");
             }
             return View("Create", producer);
@@ -56,7 +56,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Producer producer = producerRepository.GetById(id);
+            Producer producer = producerService.GetById(id);
             return View(producer);
         }
 
@@ -65,7 +65,7 @@ namespace eTickets.Controllers
         {
             if(producer != null && producer.FullName != null)
             {
-                producerRepository.Update(id, producer);
+                producerService.Update(id, producer);
                 return RedirectToAction("Index");
             }
             return View("Edit", producer);
@@ -75,7 +75,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            producerRepository.Delete(id);
+            producerService.Delete(id);
             return RedirectToAction("Index");
         }
     }
