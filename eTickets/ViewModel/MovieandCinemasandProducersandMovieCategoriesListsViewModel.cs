@@ -1,6 +1,5 @@
 ﻿using eTickets.Data;
 using eTickets.Models;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eTickets.ViewModel
 {

@@ -2,7 +2,6 @@
 using eTickets.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace eTickets.Controllers
 {
@@ -37,7 +36,7 @@ namespace eTickets.Controllers
                 IdentityResult result = await userManager.CreateAsync(applicationUser, newUserVM.Password); 
                 if(result.Succeeded)
                 {
-                    // Create Cookie                                 Persistent/Session
+                    // Create Cookie            Persistent(RememberMe .. 15 Days)/Session
                     await signInManager.SignInAsync(applicationUser, false);
                     return RedirectToAction("Index", "Movies");
                 }

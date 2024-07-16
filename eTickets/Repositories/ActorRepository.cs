@@ -1,5 +1,4 @@
 ﻿using eTickets.Models;
-using System.Collections.Generic;
 
 namespace eTickets.Services
 {

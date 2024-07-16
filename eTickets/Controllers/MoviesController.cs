@@ -3,7 +3,6 @@ using eTickets.Models;
 using eTickets.Services;
 using eTickets.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {

@@ -1,5 +1,4 @@
 ﻿using eTickets.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace eTickets.Services
 {

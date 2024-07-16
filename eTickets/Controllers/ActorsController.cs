@@ -1,7 +1,6 @@
 ﻿using eTickets.Models;
 using eTickets.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace eTickets.Controllers
 {
