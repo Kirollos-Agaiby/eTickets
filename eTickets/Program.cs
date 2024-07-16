@@ -1,6 +1,7 @@
 using eTickets.Data;
 using eTickets.Models;
 using eTickets.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTickets
@@ -17,13 +18,16 @@ namespace eTickets
 
             // Configure the Connection String
             
-             builder.Services.AddDbContext<AppDbContext>(options =>
+            builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
-            
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
 
 
             // Add Services to Container "Register"
-            
+
             // for injecting the Repository in the Service Layer
             builder.Services.AddScoped<IActorRepository, ActorRepository>();
             builder.Services.AddScoped<IProducerRepository, ProducerRepository>();
@@ -53,6 +57,7 @@ namespace eTickets
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

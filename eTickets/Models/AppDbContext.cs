@@ -1,10 +1,12 @@
-﻿using eTickets.Models;
+﻿using eTickets.Data;
+using eTickets.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace eTickets.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext() : base()
         {
@@ -22,6 +24,8 @@ namespace eTickets.Models
         */
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<Actor_Movie>().HasKey(am => new
             {
                 am.MovieId,
@@ -30,6 +34,7 @@ namespace eTickets.Models
 
             modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Movie).WithMany(am => am.Actors_Movies).HasForeignKey(m => m.MovieId);
             modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Actor).WithMany(am => am.Actors_Movies).HasForeignKey(m => m.ActorId);
+
         }
         public DbSet<Actor>? Actors { get; set; }
         public DbSet<Cinema>? Cinemas { get; set; }
